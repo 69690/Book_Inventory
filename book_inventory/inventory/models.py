@@ -5,14 +5,14 @@ class Book(models.Model):
     title = models.CharField(max_length = 200, blank = False)
     author = models.CharField(max_length = 200, blank = False)  
     google_id = models.CharField(max_length = 50, blank = False) #Google Books Volume ID
-    stock = models.PositiveIntegerField()  #Number of Items In Inventory
+    stock = models.PositiveIntegerField(default=0)  #Number of Items In Inventory
 
     choices = (
         ('Available', 'Item is in stock'),
         ('Out Of Stock', 'Item is out of stock'),
         ('Not Available', 'Item is not in inventory')
     )
-    
+
     status = models.CharField(max_length = 15, choices = choices, blank = False)  #Available, Out Of Stock, Not Available
 
     def __str__(self):
