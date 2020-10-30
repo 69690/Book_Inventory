@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'o$g#-nvwt%ng4yjstlkee(sb_&%pt(9g)e0(g0sfzi&n#i&=na'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['book-inventory-1.herokuapp.com','localhost','127.0.0.1']
 
