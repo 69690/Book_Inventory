@@ -12,28 +12,28 @@ The code also makes use of DRY concept (Don't repeat yourself) which is why temp
 ![Homepage Image](/Screenshots/Homepage.png?raw=true "Homepage")
 
 #### Add Book
-![Homepage Image](/Screenshots/Adding Book.png?raw=true "Homepage")
+![Adding Book Image](/Screenshots/Adding_Book.png?raw=true "Homepage")
 The user searches for the book in the search box that searches Google API for the corresponding book and it's details and consequently fills the corresponding entries automatically along with Google Books Volume ID. This is done to maintain integrity and consistency.
 
 #### Entering Details In Search Box
-![Homepage Image](/Screenshots/Entering Details.png?raw=true "Homepage")
+![Entering Details Image](/Screenshots/Entering_Details.png?raw=true "Homepage")
 
 #### Entry Gets Added 
-![Homepage Image](/Screenshots/Entry Gets Added.png?raw=true "Homepage")
+![Entry Gets Added Image](/Screenshots/Entry_Gets_Added.png?raw=true "Homepage")
 
 #### Editing Book Details
-![Homepage Image](/Screenshots/Editing Book Details.png?raw=true "Homepage")
+![Editing Book Details Image](/Screenshots/Editing_Book_Details.png?raw=true "Homepage")
 
 #### Notification Popups
-![Homepage Image](/Screenshots/Notification Popup.png?raw=true "Homepage")
+![Notification Popup Image](/Screenshots/Notification_Popup.png?raw=true "Homepage")
 
 #### Search Results
-![Homepage Image](/Screenshots/Search Results 1.png?raw=true "Homepage")
+![Search Results 1 Image](/Screenshots/Search_Results_1.png?raw=true "Homepage")
 The user can use the search box in the navigation bar to search for books, the application searches for books from Google Books API and also shows which books are 'Available/Out Of Stock' in inventory along with the corresponding button next to it to view the book.
 It shows 'Not Available' for books that are unavailable in the inventory.
 
 #### Search Results
-![Homepage Image](/Screenshots/Search Results 2.png?raw=true "Homepage")
+![Search Results 2 Image](/Screenshots/Search_Results_2.png?raw=true "Homepage")
 
 ## Assumptions Made
 Here are the assumptions made in developing the application:-
