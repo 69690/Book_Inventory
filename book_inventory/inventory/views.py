@@ -58,6 +58,7 @@ def edit_book(request, pk):
     if request.method == "POST":
         form = BookForm(request.POST, instance=item)   #populate form with information with the information brought earlier
         if form.is_valid(): #Valid Form
+            messages.success(request, "Book Successfully Edited")
             form.save()
             return redirect('index')
         else: #Invalid Form
