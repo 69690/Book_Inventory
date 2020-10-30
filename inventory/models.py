@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Book(models.Model):
+    class Meta:
+        ordering = ['id']  #To make things in ascending order
+
     title = models.CharField(max_length = 200, blank = False)
     author = models.CharField(max_length = 200, blank = False)  
     google_id = models.CharField(max_length = 50, blank = False) #Google Books Volume ID

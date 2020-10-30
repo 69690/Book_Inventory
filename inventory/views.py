@@ -55,7 +55,7 @@ def add_book(request):
         form = BookForm()
         return render(request, 'add_book.html', {'form': form})
 
-def edit_book(request, pk):
+def edit_book(request, pk):  #Editing Book from database
     item = get_object_or_404(Book, pk=pk) #select statement with pk
     if request.method == "POST":
         form = BookForm(request.POST, instance=item)   #populate form with information with the information brought earlier
@@ -70,7 +70,7 @@ def edit_book(request, pk):
         form = BookForm(instance=item)
         return render(request, 'edit_book.html', {'form':form})
 
-def delete_book(request, pk):
+def delete_book(request, pk): #Deleting book from database
     Book.objects.filter(id=pk).delete()
     
     items = Book.objects.all()
@@ -83,10 +83,9 @@ def delete_book(request, pk):
     return render(request, 'index.html', context)
 
 def search_book(request):
-    #https://www.googleapis.com/books/v1/volumes
-    # ?q=flowers+inauthor:keyes&key=AIzaSyCeb83AnvleYBTR9XFIQVl82cNeQyw_q0c
     try:
-        query = request.GET['query']
+        #Getting result from Google Books API Call
+        query = request.GET['query']  
         URL = 'https://www.googleapis.com/books/v1/volumes'
         PARAMS = {
             'q': query, 
@@ -95,7 +94,7 @@ def search_book(request):
 
         r = requests.get(url = URL, params = PARAMS)
 
-        class Book_s:
+        class Book_s:  #Defining a class of Book to create a list of Book objects to be passed onto the Search Results HTML
             def __init__(self, title, author, google_id, description=''):
                 self.pk = None
                 self.title = title
@@ -111,30 +110,30 @@ def search_book(request):
                     if item.stock > 0:
                         self.pk = item.pk
                         self.status = "Available"
-                    else:
+                    else: #out of stock
                         self.pk = item.pk
                         self.status = "Out Of Stock"
 
-        data = r.json()
+        data = r.json()  #Converting data to JSON format
 
         #creating a list to store all objects from the search result along with their status in inventory using above class
         search_results = []
         for i in data['items']:
             try: #check if all fields exist
                 #x = i['volumeInfo']['authors']
-                t = i['volumeInfo']['title']
+                t = i['volumeInfo']['title']  
                 a = i['volumeInfo']['authors']
                 st_a = ''
-                if len(a) == 1:
+                if len(a) == 1:  #If single author
                     st_a += a[0]
-                else:
+                else: #if multiple authors, then add them to string separated by comma
                     for i in range(len(a)-1):
                         st_a += a[i]
                         st_a += ', '
                     st_a += a[-1]
 
-                i_d = i['id']
-                try:
+                i_d = i['id']  #get the Google Volume ID
+                try: #adding the description if exists
                     d = i['volumeInfo']['description']
                     obj = Book_s(t,st_a,i_d,d)
                 except:
@@ -143,13 +142,11 @@ def search_book(request):
                 # print(obj.google_id)
                 # print(obj.status)
                 # print()
-                search_results.append(obj)
+                search_results.append(obj)  #Appending to search_results list that will be passed onto the search results HTML page to be displayed
                 # print(item['id'])
                 # print(item['volumeInfo']['authors'])
                 #print()
             except:
-                print(i)
-                print()
                 pass
 
                 #print(i['volumeInfo'])
@@ -161,7 +158,8 @@ def search_book(request):
         #         if 'authors' in v.keys():
         #             print(v['authors'])
             #print(item['volumeInfo']['authors'])
-        context = {
+
+        context = {  #Passing the search_results as well as the length of the search_results
             'search_results': search_results,
             'length': len(search_results)
         }
@@ -169,9 +167,9 @@ def search_book(request):
         messages.success(request, 'Search Results...')
         return render(request, 'search.html', context)
     except:
-        messages.error(request, "Enter a search query")
+        messages.error(request, "Enter a search query")  #If user searches without entering anything
         return redirect('index')
 
-def about(request):
+def about(request):  #Rendering about page
     messages.info(request, "Welcome To About Me")
     return render(request, 'about.html')
