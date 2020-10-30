@@ -8,7 +8,7 @@ The application has been made so as to be intuitive with many features which inc
 The application has been developed in the Model View Controller (MVC) methodology.
 
 #### Homepage
-![Homepage Image](/screenshots/Homepage.jpg?raw=true "Homepage")
+![Homepage Image](/Screenshots/Homepage.jpg?raw=true "Homepage")
 
 ## Reasoning Behind Implementation
 The fields have been so chosen so as to match with the criteria. The fields specifically chosen in the tables are:- 
