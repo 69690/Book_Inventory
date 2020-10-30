@@ -3,7 +3,7 @@
 {% block body %}
     <br>
     <div class="button-group">
-        <a href="{% url 'display_books' %}" class="btn btn-primary btn-md" role="button">Add</a>
+        <a href="{% url 'add_book' %}" class="btn btn-primary btn-md" role="button">Add</a>
         <a href="{% url 'add_book' %}" class="btn btn-warning btn-sm" role="button"> +</a>
     </div>
 
@@ -29,6 +29,10 @@
                     <td>{{ item.google_id }}</td>
                     <td>{{ item.stock }}</td>
                     <td>{{ item.status }}</td>
+                    <td>
+                        <a href="{% url 'edit_book' item.pk %}" class="btn btn-warning btn-sm" role="button">Edit</a>
+                        <a href="{% url 'delete_book' item.pk %}" class="btn btn-danger btn-sm" role="button" onclick="return confirm('Are you sure?');"> x</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
