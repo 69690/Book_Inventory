@@ -19,9 +19,19 @@ def add_book(request):
 
         if form.is_valid():
             google_id = form.cleaned_data['google_id']   #Getting Google_ID field from the form which is automatically filled with AJAX API request
-            print(google_id)
-            form.save()
-            return redirect('index')
+            
+            if not Book.objects.filter(google_id = google_id).exists(): #Book does not exist in inventory
+                #print(google_id)
+                form.save()
+                return redirect('index')
+
+            else: #Book exists in inventory
+                item = get_object_or_404(Book, google_id = google_id) #Get the item with corresponding GID
+                additional_stock = form.cleaned_data['stock']  #Get the extra stock from the form stock field
+                item.stock += additional_stock #Add to existing stock
+                form = BookForm(request.POST, instance=item)  #populate instance with new updated stock
+                form.save()
+                return redirect('index')
 
     else:
         form = BookForm()
